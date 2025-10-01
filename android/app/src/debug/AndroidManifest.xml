@@ -1,0 +1,82 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Permisos necesarios para la aplicación -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CAMERA"/> <!-- Para image_picker (tomar fotos) -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/> <!-- Para image_picker (grabar videos con audio) y audioplayers si necesitas grabar -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/> <!-- Acceso a la galería para Android 9 y anteriores -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/> <!-- Guardar en galería para Android 9 y anteriores -->
+    
+    <!-- Permisos específicos para acceder a medios en Android 10 (API 29) y superiores -->
+    <!-- Estos permisos son más modernos y específicos para imágenes, videos y audio -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO"/>
+
+    <application
+        android:label="niko_azaretto_app"
+        android:name="${applicationName}"
+        android:icon="@mipmap/ic_launcher"
+        android:requestLegacyExternalStorage="true"> <!-- CRÍTICO para acceso a almacenamiento en Android 10+ por image_picker/media_saver_plus -->
+        
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:taskAffinity=""
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+
+            <meta-data
+              android:name="io.flutter.embedding.android.NormalTheme"
+              android:resource="@style/NormalTheme"
+            />
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+
+        <!-- BLOQUE FILEPROVIDER - CRÍTICO para image_picker y media_saver_plus -->
+        <!-- Permite compartir archivos de forma segura entre apps -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
+    </application>
+
+    <!-- Bloque <queries> para url_launcher y otros que consulten packages -->
+    <!-- Necesario para que Android 11 (API 30) y superiores permitan abrir URLs HTTP/HTTPS -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="http" />
+        </intent>
+        <!-- Opcional: Si necesitas soporte para Custom Tabs (navegador in-app), añade esto también -->
+        <intent>
+            <action android:name="android.support.customtabs.action.CustomTabsService" />
+        </intent>
+        <!-- Este bloque es para la funcionalidad de seleccionar texto -->
+        <intent>
+            <action android:name="android.intent.action.PROCESS_TEXT"/>
+            <data android:mimeType="text/plain"/>
+        </intent>
+    </queries>
+</manifest>

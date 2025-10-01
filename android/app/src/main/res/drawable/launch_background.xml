@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Modify this file to customize your launch splash screen -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Cambia el fondo de blanco a tu color negro deseado -->
+    <item android:drawable="#FF101010" /> <!-- Usa el valor hexadecimal de tu color negro -->
+
+    <!-- Puedes insertar tus propios recursos de imagen aquí -->
+    <!-- Si tienes un logo que quieres que aparezca también en esta pantalla nativa,
+         descomenta la siguiente sección. Asegúrate de que la imagen sea un PNG
+         transparente o que su fondo también sea negro para que coincida.
+         Si tu logo solo debe aparecer en la pantalla de Flutter, puedes dejar esta parte comentada.
+    -->
+    <!-- <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@mipmap/launch_image" />
+    </item> -->
+</layer-list>

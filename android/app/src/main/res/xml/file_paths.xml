@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- Esto permite que image_picker y media_saver_plus accedan a rutas de archivos temporales -->
+    <external-path name="my_images" path="Android/data/${applicationId}/files/Pictures" />
+    <external-path name="external_files" path="."/>
+</paths>
