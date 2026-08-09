@@ -521,7 +521,7 @@ class _EventsScreenState extends State<EventsScreen> {
                       Image.asset('assets/logo.png', width: 90, height: 90),
                       const SizedBox(height: 6),
                       Text(
-                        'Eventos 2025 – 2026',
+                        'Eventos 2026 – 2027',
                         style: Theme.of(context)
                             .textTheme
                             .displayLarge

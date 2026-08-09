@@ -2,7 +2,7 @@ name: niko_azaretto_app
 description: A new Flutter project.
 publish_to: 'none'
 
-version: 1.0.2+14
+version: 1.0.2+15
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
